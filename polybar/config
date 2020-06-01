@@ -1,0 +1,198 @@
+[colors]
+background = #CC282828
+foreground = #ebdbb2
+gruv3 = #8ec07c 
+gruv4 = #fabd2f
+urgent = #cc241d
+warning = #D08770
+notify = #EBCB8B
+success = #A3BE8C
+function = #B48EAD
+
+[bar/main]
+override-redirect = true
+wm-restack = i3
+bottom = false
+width = 100%
+height = 45 
+;offset-x = 
+;offset-y = 
+background = ${colors.background}
+foreground = ${colors.foreground}
+radius = 0 
+line-size = 6
+;border-size = 
+;border-color = 
+
+; Number of spaces to add at the beginning/end of the bar
+padding-left = 2
+padding-right = 0
+
+; Number of spaces to add before/afer each module
+module-margin-left = 2
+module-margin-right = 1
+
+; Fonts are defined using <font-name>;<vertical-offset>
+font-0 = Hack:style=Bold:pixelsize=11;2
+font-1 = Font Awesome 5 Free Solid:style=Solid:size=9;2
+font-2 = Font Awesome 5 Free Regular:style=Regular:size=10;1
+font-3 = Font Awesome 5 Brands Regular:style=Regular:size=10;1
+font-4 = Material Icons:style=Regular:size=16;4
+
+; Modules are added to one of the available blocks
+modules-left = i3 seperator mpd 
+modules-center = 
+modules-right = pulseaudio seperator cpu seperator memory seperator battery seperator date seperator 
+
+;separator = | 
+; Opacity value between 0.0 and 1.0 used on fade in/out
+;dim-value = 1.0
+
+; Position of the system tray window
+tray-position = right
+tray-detached = false
+tray-padding = 6
+
+cursor-click = pointer
+
+[global/wm]
+margin-bottom = 1 
+margin-top = 5
+
+[settings]
+screenchange-reload = true
+pseudo-transparency = false
+
+[module/mpd]
+type = internal/mpd
+host = 127.0.0.1
+port = 6600
+interval = 1
+format-online = <icon-prev> <toggle> <icon-next> <label-song>
+label-song = "  %artist% - %title%"
+label-song-maxlen = 50 
+icon-play = "  "
+icon-pause = "  "
+icon-prev = "  "
+icon-next = "  "
+
+[module/i3]
+type = internal/i3
+ws-icon-0 = 1;I
+ws-icon-1 = 2;II
+ws-icon-2 = 3;III
+ws-icon-3 = 4;IV
+ws-icon-4 = 5;V
+ws-icon-5 = 6;VI
+ws-icon-6 = 7;VII
+ws-icon-7 = 8;VIII
+ws-icon-8 = 9;IX
+ws-icon-9 = 10;X
+
+label-focused = "%icon% "
+label-focused-padding = 1
+label-focused-foreground = ${colors.gruv3} 
+;label-focused-underline = ${colors.gruv3} 
+
+label-unfocused = "%icon% "
+label-unfocused-padding = 1  
+
+label-urgent = "%icon% "
+label-urgent-foreground = ${colors.urgent} 
+label-urgent-padding = 1
+
+[module/date]
+type = internal/date
+interval = 1
+time = %I:%M%
+date = %a, %d %B
+label = "%date% %{F#8ec07c}|%{F-} %time%"
+date-alt = %a, %d %B
+time-alt = %H:%M%
+
+[module/battery]
+type = internal/battery
+battery = BAT1
+adapter = ADP1
+full-at = 99
+
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+
+label-charging = %percentage%%
+label-discharging = %percentage%%
+
+format-full-prefix = 
+format-full-prefix-foreground = ${colors.foreground}
+label-full = " 100%"
+
+ramp-capacity-foreground = ${colors.foreground}
+ramp-capacity-0 = " "
+ramp-capacity-1 = " "
+ramp-capacity-2 = " "
+ramp-capacity-3 = " "
+ramp-capacity-4 = " "
+
+animation-charging-foreground = ${colors.foreground}
+animation-charging-0 = " "
+animation-charging-1 = " "
+animation-charging-2 = " "
+animation-charging-3 = " "
+animation-charging-framerate = 750
+
+[module/wlan]
+type = internal/network
+interface = wlp5s0
+interval = 3.0
+label-connected = "%essid%" 
+format-disconnected = 
+label-disconnected = %ifname% disconnected
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground}
+label ="%percentage:2%%"
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground}
+label = " %percentage_used%%"
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+format-prefix = " "
+label = " %temperature-c% "
+label-warn = " %temperature-c% "
+label-warn-foreground = #fa2819
+
+[module/filesystem]
+type = internal/fs
+mount-0 = /home 
+interval = 25
+label-mounted ="%{F#A2C8D9}%{F-}  %percentage_used%% "
+
+[module/pulseaudio]
+type = internal/pulseaudio
+label-volume-foreground = ${colors.foreground}
+label-volume = "%{F#ebdbb2}%{F-}  %percentage%%"
+label-muted = "%{F#ebdbb2}%{F-}  Muted"
+label-muted-foreground = ${colors.foreground}
+
+[module/seperator]
+type = custom/text
+content = " "
+content-background = #B3282828 
+
+[module/powermenu]
+type = custom/text
+content = 
+click-left = ~/scripts/power-menu
+content-background = ${colors.background}
+content-foreground = ${colors.foreground}
+content-padding = 2
